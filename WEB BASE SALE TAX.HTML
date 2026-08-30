@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,16 +21,6 @@
             padding: 2rem 1rem;
         }
 
-        .container {
-            max-width: 1440px;
-            width: 100%;
-            background: white;
-            border-radius: 28px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            overflow: hidden;
-            padding: 1.5rem 1.5rem 2.5rem;
-        }
-
         .login-overlay {
             position: fixed;
             top: 0;
@@ -38,11 +28,11 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(4px);
+            z-index: 9999;
         }
 
         .login-overlay.hidden {
@@ -52,36 +42,35 @@
         .login-box {
             background: white;
             padding: 2.5rem 3rem;
-            border-radius: 24px;
+            border-radius: 28px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            max-width: 440px;
             width: 100%;
-            max-width: 400px;
+            animation: slideUp 0.4s ease;
         }
 
-        .login-box .logo {
-            text-align: center;
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .login-box h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
-        }
-
-        .login-box .logo h2 {
-            font-size: 2rem;
-            font-weight: 700;
             color: #0b2b3f;
-            letter-spacing: -0.02em;
-        }
-
-        .login-box .logo span {
-            background: linear-gradient(145deg, #0b2b3f, #1b4a66);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .login-box .subtitle {
             color: #6e879b;
-            text-align: center;
-            margin-bottom: 1.8rem;
             font-size: 0.9rem;
+            margin-bottom: 1.8rem;
         }
 
         .login-box .form-group {
@@ -95,22 +84,22 @@
             letter-spacing: 0.04em;
             color: #4f6b7d;
             font-weight: 600;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.3rem;
         }
 
         .login-box .form-group input {
             width: 100%;
             padding: 0.7rem 1rem;
-            border: 2px solid #d5dfe8;
+            border: 1px solid #d5dfe8;
             border-radius: 12px;
             font-size: 0.95rem;
+            background: white;
             outline: none;
-            transition: 0.15s;
         }
 
         .login-box .form-group input:focus {
             border-color: #0b2b3f;
-            box-shadow: 0 0 0 3px rgba(11, 43, 63, 0.08);
+            box-shadow: 0 0 0 3px rgba(11,43,63,0.08);
         }
 
         .login-box .login-btn {
@@ -131,62 +120,51 @@
             background: #1a4058;
         }
 
-        .login-box .error-msg {
-            color: #dc2626;
-            font-size: 0.85rem;
-            text-align: center;
+        .login-box .login-btn-user {
+            background: #0f7b3e;
+        }
+
+        .login-box .login-btn-user:hover {
+            background: #129446;
+        }
+
+        .login-box .login-error {
+            color: #b91c1c;
+            font-size: 0.8rem;
             margin-top: 0.5rem;
+            text-align: center;
             min-height: 1.5rem;
         }
 
-        .user-info {
+        .login-box .login-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-box .login-options {
             display: flex;
-            align-items: center;
             gap: 0.8rem;
-            padding: 0.3rem 1rem 0.3rem 1.5rem;
-            background: #f1f5f9;
-            border-radius: 60px;
+            margin-top: 0.5rem;
         }
 
-        .user-info .username {
-            font-weight: 500;
-            font-size: 0.85rem;
-            color: #1f3e52;
+        .login-box .login-options .login-btn {
+            flex: 1;
+            text-align: center;
         }
 
-        .user-info .role-tag {
-            font-size: 0.65rem;
-            padding: 0.15rem 0.7rem;
-            border-radius: 20px;
-            font-weight: 600;
-            text-transform: uppercase;
+        .container {
+            max-width: 1440px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            padding: 1.5rem 1.5rem 2.5rem;
         }
 
-        .role-tag.admin-tag {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .role-tag.user-tag {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .logout-btn {
-            background: transparent;
-            border: 1px solid #d0dce8;
-            padding: 0.3rem 1rem;
-            border-radius: 60px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            color: #4f6b7d;
-            transition: 0.15s;
-        }
-
-        .logout-btn:hover {
-            background: #fee2e2;
-            border-color: #dc2626;
-            color: #dc2626;
+        .container.hidden {
+            display: none;
         }
 
         .report-header {
@@ -203,11 +181,7 @@
         .report-header h1 {
             font-size: 1.9rem;
             font-weight: 600;
-            letter-spacing: -0.02em;
-            background: linear-gradient(145deg, #0b2b3f, #1b4a66);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #0b2b3f;
         }
 
         .header-actions {
@@ -224,8 +198,6 @@
             font-weight: 600;
             font-size: 0.95rem;
             color: #1a3b4f;
-            letter-spacing: 0.3px;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
         }
 
         .btn {
@@ -238,7 +210,6 @@
             color: #1f3e52;
             cursor: pointer;
             transition: all 0.15s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -252,7 +223,6 @@
 
         .btn-primary:hover {
             background: #1a4058;
-            border-color: #1a4058;
         }
 
         .btn-success {
@@ -263,7 +233,6 @@
 
         .btn-success:hover {
             background: #129446;
-            border-color: #129446;
         }
 
         .btn-danger {
@@ -274,33 +243,31 @@
 
         .btn-danger:hover {
             background: #dc2626;
-            border-color: #dc2626;
         }
 
-        .btn-outline {
-            background: transparent;
-            border-color: #cbd6e0;
-        }
-
-        .btn-outline:hover {
-            background: #f2f6fb;
-            border-color: #a0b3c4;
-        }
-
-        .btn-info {
-            background: #2563eb;
-            border-color: #2563eb;
+        .btn-danger-small {
+            background: #dc2626;
+            border: none;
             color: white;
+            padding: 0.2rem 0.7rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            font-weight: 500;
         }
 
-        .btn-info:hover {
-            background: #1d4ed8;
-            border-color: #1d4ed8;
+        .btn-danger-small:hover {
+            background: #b91c1c;
         }
 
-        .btn:disabled {
-            opacity: 0.5;
+        .btn-danger-small.disabled {
+            background: #9ca3af;
             cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .btn-danger-small.disabled:hover {
+            background: #9ca3af;
         }
 
         .add-form {
@@ -319,7 +286,7 @@
             display: flex;
             flex-direction: column;
             gap: 0.25rem;
-            flex: 1 1 140px;
+            flex: 1 1 130px;
         }
 
         .add-form .form-group label {
@@ -336,7 +303,6 @@
             border-radius: 10px;
             font-size: 0.85rem;
             background: white;
-            transition: 0.1s;
             outline: none;
         }
 
@@ -345,13 +311,11 @@
             box-shadow: 0 0 0 3px rgba(11,43,63,0.08);
         }
 
-        .add-form .form-group input::placeholder {
-            color: #9aafbe;
-        }
-
-        .add-form .form-group input:disabled {
-            background: #eef2f6;
-            color: #6e879b;
+        .add-form .form-group input.readonly-field {
+            background: #f3f4f6;
+            color: #4b5563;
+            cursor: not-allowed;
+            opacity: 0.8;
         }
 
         .add-form .form-actions {
@@ -359,6 +323,80 @@
             gap: 0.5rem;
             align-items: center;
             padding-bottom: 0.1rem;
+        }
+
+        .auto-hint {
+            font-size: 0.65rem;
+            color: #0f7b3e;
+            font-weight: 500;
+            margin-top: 0.1rem;
+            min-height: 1.2rem;
+        }
+
+        .date-filter-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem 1.5rem;
+            background: #f8fafc;
+            padding: 0.7rem 1.5rem;
+            border-radius: 60px;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2eaf1;
+        }
+
+        .date-filter-section label {
+            font-weight: 500;
+            color: #1f3e52;
+            font-size: 0.85rem;
+        }
+
+        .date-filter-section input[type="date"] {
+            padding: 0.5rem 0.7rem;
+            border: 1px solid #d5dfe8;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            background: white;
+            outline: none;
+        }
+
+        .date-filter-section input[type="date"]:focus {
+            border-color: #0b2b3f;
+            box-shadow: 0 0 0 3px rgba(11,43,63,0.08);
+        }
+
+        .date-filter-section .date-range-sep {
+            color: #6e879b;
+            font-weight: 500;
+        }
+
+        .date-filter-section .btn-filter {
+            background: #0b2b3f;
+            border: none;
+            color: white;
+            padding: 0.45rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .date-filter-section .btn-filter:hover {
+            background: #1a4058;
+        }
+
+        .date-filter-section .btn-clear-date {
+            background: transparent;
+            border: none;
+            color: #6e879b;
+            font-size: 0.8rem;
+            padding: 0 0.6rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .date-filter-section .btn-clear-date:hover {
+            color: #1f3e52;
         }
 
         .search-section {
@@ -377,7 +415,6 @@
             font-weight: 500;
             color: #1f3e52;
             font-size: 0.85rem;
-            letter-spacing: 0.02em;
         }
 
         .search-input-wrapper {
@@ -388,7 +425,6 @@
             border: 1px solid #d5dfe8;
             padding: 0.2rem 0.2rem 0.2rem 1rem;
             flex: 1 1 260px;
-            transition: 0.1s;
         }
 
         .search-input-wrapper:focus-within {
@@ -419,7 +455,6 @@
             font-weight: 500;
             font-size: 0.8rem;
             cursor: pointer;
-            transition: 0.1s;
             white-space: nowrap;
         }
 
@@ -439,84 +474,6 @@
 
         .search-clear:hover {
             color: #1f3e52;
-        }
-
-        /* Date Range Filter */
-        .date-filter-section {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.8rem 1.5rem;
-            background: #f0f4f8;
-            padding: 0.7rem 1.5rem;
-            border-radius: 60px;
-            margin-bottom: 1.5rem;
-            border: 1px solid #dce5ed;
-        }
-
-        .date-filter-section label {
-            font-weight: 500;
-            color: #1f3e52;
-            font-size: 0.8rem;
-            letter-spacing: 0.02em;
-        }
-
-        .date-filter-section input[type="date"] {
-            padding: 0.4rem 0.8rem;
-            border: 1px solid #d5dfe8;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            background: white;
-            outline: none;
-            transition: 0.1s;
-        }
-
-        .date-filter-section input[type="date"]:focus {
-            border-color: #0b2b3f;
-            box-shadow: 0 0 0 3px rgba(11,43,63,0.08);
-        }
-
-        .date-filter-section .date-range-btn {
-            background: #0b2b3f;
-            border: none;
-            color: white;
-            padding: 0.4rem 1.2rem;
-            border-radius: 60px;
-            font-weight: 500;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-
-        .date-filter-section .date-range-btn:hover {
-            background: #1a4058;
-        }
-
-        .date-filter-section .date-clear-btn {
-            background: transparent;
-            border: 1px solid #cbd6e0;
-            color: #4f6b7d;
-            padding: 0.4rem 1rem;
-            border-radius: 60px;
-            font-weight: 500;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-
-        .date-filter-section .date-clear-btn:hover {
-            background: #fee2e2;
-            border-color: #dc2626;
-            color: #dc2626;
-        }
-
-        .date-filter-section .date-badge {
-            background: #dbeafe;
-            color: #1e40af;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
         }
 
         .result-count {
@@ -555,7 +512,6 @@
             font-weight: 700;
             color: #0b2b3f;
             margin-top: 0.2rem;
-            letter-spacing: -0.01em;
         }
 
         .table-wrapper {
@@ -570,7 +526,7 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 0.85rem;
-            min-width: 820px;
+            min-width: 900px;
         }
 
         th {
@@ -582,7 +538,6 @@
             border-bottom: 2px solid #dbe1e8;
             white-space: nowrap;
             font-size: 0.78rem;
-            letter-spacing: 0.03em;
             text-transform: uppercase;
         }
 
@@ -611,14 +566,59 @@
             text-align: center;
         }
 
-        .total-row {
-            background: #f2f6fb;
-            font-weight: 600;
-            border-top: 2px solid #cbd6e0;
+        .empty-row td {
+            color: #8f9fad;
+            font-style: italic;
+            padding: 1.5rem 0.8rem;
+            text-align: center;
         }
 
-        .total-row td {
-            padding: 0.9rem 0.8rem;
+        .delete-cell {
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 1px solid #d0dce8;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #1f3e52;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background: #f2f6fb;
+        }
+
+        .user-role-badge {
+            font-size: 0.75rem;
+            padding: 0.3rem 1rem;
+            border-radius: 60px;
+            background: #0b2b3f;
+            color: white;
+            font-weight: 500;
+        }
+
+        .user-role-badge.user {
+            background: #0f7b3e;
+        }
+
+        .user-restriction-notice {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #92400e;
+            display: none;
+        }
+
+        .user-restriction-notice.visible {
+            display: block;
         }
 
         .footer-note {
@@ -632,164 +632,62 @@
             flex-wrap: wrap;
         }
 
-        .footer-note .footer-left {
+        .file-sync-status {
             display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
-        }
-
-        .footer-note .footer-left .company {
-            font-weight: 600;
-            color: #0b2b3f;
-            font-size: 0.85rem;
-        }
-
-        .footer-note .footer-left .designer {
-            font-size: 0.7rem;
-            color: #6e879b;
-        }
-
-        .footer-note .footer-left .designer strong {
-            color: #1f3e52;
-        }
-
-        .invoice-count {
-            font-weight: 500;
-        }
-
-        .empty-row td {
-            color: #8f9fad;
-            font-style: italic;
-            padding: 1.5rem 0.8rem;
-            text-align: center;
-        }
-
-        .delete-btn {
-            background: #dc2626;
-            border: none;
-            color: white;
-            padding: 0.2rem 0.7rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: 0.1s;
-            font-weight: 500;
-        }
-
-        .delete-btn:hover {
-            background: #b91c1c;
-        }
-
-        .delete-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        .edit-btn {
-            background: #2563eb;
-            border: none;
-            color: white;
-            padding: 0.2rem 0.7rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: 0.1s;
-            font-weight: 500;
-            margin-right: 0.3rem;
-        }
-
-        .edit-btn:hover {
-            background: #1d4ed8;
-        }
-
-        .edit-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
             align-items: center;
-            z-index: 2000;
-            backdrop-filter: blur(4px);
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-box {
-            background: white;
-            padding: 2rem 2.5rem;
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .modal-box h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #0b2b3f;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-box .form-group {
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: #92400e;
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 12px;
+            padding: 0.5rem 1rem;
             margin-bottom: 1rem;
         }
 
-        .modal-box .form-group label {
-            display: block;
+        .file-sync-status.connected {
+            color: #0f7b3e;
+            background: #e6f7ed;
+            border-color: #0f7b3e;
+        }
+
+        .file-sync-status .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #f59e0b;
+            flex-shrink: 0;
+        }
+
+        .file-sync-status.connected .dot {
+            background: #0f7b3e;
+        }
+
+        .footer-credits {
+            margin-top: 0.4rem;
+            padding: 0 1rem;
             font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            color: #4f6b7d;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .modal-box .form-group input {
-            width: 100%;
-            padding: 0.6rem 0.8rem;
-            border: 2px solid #d5dfe8;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            outline: none;
-            transition: 0.15s;
-        }
-
-        .modal-box .form-group input:focus {
-            border-color: #0b2b3f;
-            box-shadow: 0 0 0 3px rgba(11, 43, 63, 0.08);
-        }
-
-        .modal-box .modal-actions {
+            color: #8a9bab;
             display: flex;
-            gap: 0.8rem;
-            margin-top: 1.5rem;
-            justify-content: flex-end;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.3rem 1rem;
         }
 
         @media print {
             body { background: white; padding: 0.5rem; }
             .container { box-shadow: none; border: 1px solid #ccc; border-radius: 12px; }
-            .btn, .search-section, .header-actions .btn, .add-form, .delete-btn, .edit-btn, .user-info, .logout-btn, .date-filter-section { display: none !important; }
+            .btn, .search-section, .header-actions .btn, .add-form, .delete-cell, .date-filter-section, .file-sync-status { display: none !important; }
             .report-header { border-bottom-color: #aaa; }
             .summary-cards { background: #f5f7fa; border-color: #ccc; }
             .table-wrapper { border-color: #aaa; }
             th { background: #e9edf2 !important; }
-            .total-row { background: #e9edf2 !important; }
             .footer-note { border-top-color: #aaa; }
             .search-section { display: none !important; }
-            .login-overlay { display: none !important; }
-            .modal-overlay { display: none !important; }
+            .logout-btn { display: none !important; }
+            .user-role-badge { display: none !important; }
+            .user-restriction-notice { display: none !important; }
+            .date-filter-section { display: none !important; }
         }
 
         @media (max-width: 640px) {
@@ -800,688 +698,918 @@
             .search-section { border-radius: 20px; padding: 0.7rem 1rem; }
             .search-input-wrapper { flex: 1 1 100%; }
             .add-form .form-group { flex: 1 1 100%; }
-            .login-box { padding: 1.5rem; margin: 1rem; }
-            .user-info { padding: 0.3rem 0.8rem; }
-            .user-info .username { font-size: 0.75rem; }
-            .date-filter-section { border-radius: 20px; padding: 0.7rem 1rem; }
-            .date-filter-section input[type="date"] { width: 100%; }
+            .login-box { padding: 2rem 1.5rem; }
+            .login-box .login-options {
+                flex-direction: column;
+            }
+            .date-filter-section {
+                border-radius: 20px;
+                padding: 0.7rem 1rem;
+            }
+            .date-filter-section input[type="date"] {
+                flex: 1 1 100%;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="login-overlay" id="loginOverlay">
-    <div class="login-box">
-        <div class="logo">
-            <h2>🍯 <span>KIWI</span></h2>
-        </div>
-        <p class="subtitle">Advance Tax Invoice System</p>
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" id="loginUsername" placeholder="Enter username" autocomplete="off">
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" id="loginPassword" placeholder="Enter password">
-        </div>
-        <button class="login-btn" id="loginBtn">🔐 Sign In</button>
-        <div class="error-msg" id="loginError"></div>
-    </div>
-</div>
-
-<div class="modal-overlay" id="editModal">
-    <div class="modal-box">
-        <h3>✏️ Edit Invoice</h3>
-        <div class="form-group">
-            <label>Party Name</label>
-            <input type="text" id="editParty" />
-        </div>
-        <div class="form-group">
-            <label>NTRN</label>
-            <input type="text" id="editNtrn" />
-        </div>
-        <div class="form-group">
-            <label>STRN</label>
-            <input type="text" id="editStrn" />
-        </div>
-        <div class="form-group">
-            <label>Invoice #</label>
-            <input type="text" id="editInv" />
-        </div>
-        <div class="form-group">
-            <label>Date</label>
-            <input type="date" id="editDate" />
-        </div>
-        <div class="form-group">
-            <label>Advance Tax</label>
-            <input type="number" id="editTax" step="1" />
-        </div>
-        <div class="form-group">
-            <label>EX VALUE</label>
-            <input type="number" id="editEx" step="0.01" />
-        </div>
-        <div class="form-group">
-            <label>TOTAL SALE</label>
-            <input type="number" id="editSale" step="1" />
-        </div>
-        <div class="modal-actions">
-            <button class="btn btn-outline" id="editCancelBtn">Cancel</button>
-            <button class="btn btn-success" id="editSaveBtn">💾 Save Changes</button>
-        </div>
-    </div>
-</div>
-
-<div class="container">
-
-    <div class="report-header">
-        <h1>🍯 KIWI · ADVANCE TAX INVOICE</h1>
-        <div class="header-actions">
-            <span class="month-badge">📅 JULY 2026</span>
-            <div class="user-info" id="userInfo">
-                <span class="username" id="currentUsername">User</span>
-                <span class="role-tag" id="currentRoleTag">USER</span>
-                <button class="logout-btn" id="logoutBtn">🚪 Logout</button>
+    <!-- ===== LOGIN OVERLAY ===== -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <div class="login-icon">🔐</div>
+            <h2>KIWI · Tax Invoice System</h2>
+            <p class="subtitle">Enter your credentials to continue</p>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="loginUser" placeholder="Enter username" />
             </div>
-            <button class="btn btn-primary" onclick="window.print()">🖨️ Print</button>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPass" placeholder="Enter password" />
+            </div>
+            <div class="login-options">
+                <button class="login-btn" id="adminLoginBtn">👑 Admin</button>
+                <button class="login-btn login-btn-user" id="userLoginBtn">👤 User</button>
+            </div>
+            <div class="login-error" id="loginError"></div>
         </div>
     </div>
 
-    <div class="add-form" id="addForm">
-        <div class="form-group">
-            <label>Party Name</label>
-            <input type="text" id="newParty" placeholder="e.g. NEW MART" autocomplete="off" />
-            <span id="partyMatchStatus" style="font-size:0.7rem;color:#6e879b;min-height:1.2rem;"></span>
-        </div>
-        <div class="form-group">
-            <label>NTRN</label>
-            <input type="text" id="newNtrn" placeholder="1234567-8" />
-        </div>
-        <div class="form-group">
-            <label>STRN</label>
-            <input type="text" id="newStrn" placeholder="987654321-0" />
-        </div>
-        <div class="form-group">
-            <label>Invoice #</label>
-            <input type="text" id="newInv" placeholder="999999" />
-        </div>
-        <div class="form-group">
-            <label>Date</label>
-            <input type="date" id="newDate" />
-        </div>
-        <div class="form-group">
-            <label>Advance Tax</label>
-            <input type="number" id="newTax" placeholder="0" step="1" />
-        </div>
-        <div class="form-group">
-            <label>EX VALUE</label>
-            <input type="number" id="newEx" placeholder="0.00" step="0.01" />
-        </div>
-        <div class="form-group">
-            <label>TOTAL SALE</label>
-            <input type="number" id="newSale" placeholder="0" step="1" />
-        </div>
-        <div class="form-actions">
-            <button class="btn btn-success" id="addEntryBtn">➕ Add</button>
-            <button class="btn btn-danger" id="resetDataBtn">↺ Reset</button>
-        </div>
+    <!-- ===== MAIN CONTAINER ===== -->
+    <div class="container hidden" id="mainContainer">
+        <div id="appContent"></div>
     </div>
 
-    <!-- DATE RANGE FILTER -->
-    <div class="date-filter-section" id="dateFilterSection">
-        <label>📅 Date Range:</label>
-        <input type="date" id="fromDate" />
-        <span style="color:#6e879b;font-weight:300;">→</span>
-        <input type="date" id="toDate" />
-        <button class="date-range-btn" id="dateFilterBtn">🔍 Apply Date Filter</button>
-        <button class="date-clear-btn" id="clearDateFilter">✕ Clear</button>
-        <span class="date-badge" id="dateRangeBadge" style="display:none;">📆 Filter Active</span>
-    </div>
-
-    <div class="search-section" id="searchSection">
-        <label for="partySearch">🔍 Party</label>
-        <div class="search-input-wrapper">
-            <input type="text" id="partySearch" placeholder="Type party name..." autocomplete="off">
-            <button id="searchBtn">Search</button>
-            <button class="search-clear" id="clearSearch" title="Clear filter">✕</button>
-        </div>
-        <span class="result-count" id="resultCount">0 entries</span>
-    </div>
-
-    <div class="summary-cards" id="summaryCards">
-        <div class="summary-item"><span class="label">🧾 Total invoices</span><span class="value" id="totalInvoices">0</span></div>
-        <div class="summary-item"><span class="label">💰 Advance Tax (236G)</span><span class="value" id="totalTax">0</span></div>
-        <div class="summary-item"><span class="label">📊 EX VALUE</span><span class="value" id="totalExValue">0</span></div>
-        <div class="summary-item"><span class="label">💵 TOTAL SALE</span><span class="value" id="totalSale">0</span></div>
-    </div>
-
-    <div class="table-wrapper">
-        <table>
-            <thead>
-                <tr>
-                    <th>Action</th>
-                    <th>Party Name</th>
-                    <th>NTRN</th>
-                    <th>STRN</th>
-                    <th>Invoice #</th>
-                    <th>Date</th>
-                    <th class="text-right">Advance Tax 236G</th>
-                    <th class="text-right">EX VALUE</th>
-                    <th class="text-right">TOTAL SALE</th>
-                </tr>
-            </thead>
-            <tbody id="invoiceTableBody">
-            </tbody>
-        </table>
-    </div>
-
-    <div class="footer-note">
-        <div class="footer-left">
-            <span class="company">🏢 Report Generated by: Hammad Sales Agency Multan</span>
-            <span class="designer">🎨 Designed by: <strong>MALIK MUBASHIR KHOKHAR</strong></span>
-        </div>
-        <span>⏱️ report generated · 23 Aug 2026</span>
-    </div>
-</div>
-
-<script>
-    (function() {
+    <script>
         // ============================================================
-        // 🔐 USER CREDENTIALS - Set your own usernames and passwords here
+        // LOGIN SYSTEM
         // ============================================================
-        const USERS = {
-            admin: { password: 'admin123', role: 'admin' },
-            user: { password: 'user123', role: 'user' }
+
+        document.getElementById('adminLoginBtn').onclick = function() {
+            loginUser('admin');
         };
 
-        // ----- INITIAL DATA -----
-        const initialData = [
-            { party: "IDEAL SUPER MALL", ntrn: "5527785-3", strn: "327787619200-4", inv: "125174", date: "2026-07-28", tax: 290, ex: 49425.18, sale: 57935 },
-            { party: "LATIF SUPER STORE", ntrn: "4302495-5", strn: "312016393391-5", inv: "124684", date: "2026-07-04", tax: 2468, ex: 451927.3, sale: 493688 },
-            { party: "LATIF SUPER STORE", ntrn: "4302495-5", strn: "312016393391-5", inv: "124735", date: "2026-07-07", tax: 280, ex: 5133.6, sale: 56047 },
-            { party: "LATIF SUPER STORE", ntrn: "4302495-5", strn: "312016393391-5", inv: "125206", date: "2026-07-30", tax: 2103, ex: 389083.3, sale: 420539 },
-            { party: "IDEAL MALL 6 NO", ntrn: "7582544-8", strn: "327787614826-4", inv: "124923", date: "2026-07-14", tax: 254, ex: 45009.69, sale: 50833 },
-            { party: "FRESHCO BOSAN ROAD", ntrn: "4352232-7", strn: "363023822882-7", inv: "125123", date: "2026-07-25", tax: 108, ex: 19950.08, sale: 21677 },
-            { party: "TREND STORE GULGSHT", ntrn: "1309897-7", strn: "40013098971-9", inv: "124734", date: "2026-07-07", tax: 633, ex: 108200.1, sale: 126591 },
-            { party: "FIYAZ MART", ntrn: "1749512-1", strn: "327787618368-2", inv: "124924", date: "2026-07-14", tax: 93, ex: 15981.18, sale: 18549 },
-            { party: "KK MART BOSAN ROAD", ntrn: "7197572-2", strn: "327787616144-3", inv: "124644", date: "2026-07-01", tax: 871, ex: 154341.3, sale: 174265 },
-            { party: "KK MART BOSAN ROAD", ntrn: "7197572-2", strn: "327787616144-3", inv: "124926", date: "2026-07-14", tax: 94, ex: 16418.82, sale: 18803 },
-            { party: "KK MART HUSSAIN AGHAI", ntrn: "7197572-2", strn: "327787616144-3", inv: "125107", date: "2026-07-23", tax: 488, ex: 86605.32, sale: 97506 },
-            { party: "AL RAFAY HYPER MART", ntrn: "4648779", strn: "4648779-00", inv: "125205", date: "2026-07-30", tax: 263, ex: 48333.89, sale: 52581 },
-            { party: "FOOD FESTIVAL KHANEWAL", ntrn: "1480015-2", strn: "327787624146-8", inv: "124708", date: "2026-07-05", tax: 262, ex: 44662.05, sale: 52314 },
-            { party: "D MARINA SHERSHA ROAD", ntrn: "9385097-5", strn: "938509-7", inv: "125088", date: "2026-07-22", tax: 144, ex: 25474.89, sale: 28854 },
-            { party: "PRINCE STORE", ntrn: "0123419-6", strn: "40001234191-1", inv: "125194", date: "2026-07-29", tax: 243, ex: 42227.76, sale: 48691 },
-            { party: "PERFUME PALCE CANT", ntrn: "0122268-6", strn: "363027610587-3", inv: "124953", date: "2026-07-15", tax: 204, ex: 35221.02, sale: 40770 },
-            { party: "BAKHT MART MODEL TOWN", ntrn: "5124957-6", strn: "3277876172314", inv: "125067", date: "2026-07-21", tax: 547, ex: 94665.92, sale: 109365 },
-            { party: "BEST ONE", ntrn: "D188987-5", strn: "D188987", inv: "125054", date: "2026-07-21", tax: 19, ex: 3233.46, sale: 3809 },
-            { party: "JK MART OSR", ntrn: "", strn: "3630206374537", inv: "124649", date: "2026-07-01", tax: 294, ex: 51272.25, sale: 58898 },
-            { party: "JK MART OSR", ntrn: "", strn: "3630206374537", inv: "124731", date: "2026-07-06", tax: 46, ex: 7986.69, sale: 9152 },
-            { party: "JK MART OSR", ntrn: "", strn: "", inv: "125090", date: "2026-07-22", tax: 25, ex: 4680.27, sale: 5093 },
-            { party: "BEHRIA SUPER STORE", ntrn: "3630279332553", strn: "79332553", inv: "125089", date: "2026-07-22", tax: 340, ex: 58547.12, sale: 68041 },
-            { party: "4 EVER BAKERS TARIQ ROAD", ntrn: "3525569-2", strn: "36304671934", inv: "124789", date: "2026-07-08", tax: 97, ex: 16773.24, sale: 19453 },
-            { party: "TESCO MART TANK CHOWK", ntrn: "1826721-1", strn: "36302-2906795-0", inv: "124791", date: "2026-07-08", tax: 43, ex: 7441.85, sale: 8685 },
-            { party: "SHAH RUKN-E-ALAM", ntrn: "230123-2", strn: "3630270276253", inv: "124983", date: "2026-07-16", tax: 150, ex: 27260.4, sale: 30059 },
-            { party: "711 DHA", ntrn: "4729545-0", strn: "32402-9637719-3", inv: "12068", date: "2026-07-21", tax: 178, ex: 30943.6, sale: 35606 },
-            { party: "GIFT POINT SHAREEF PALAZA", ntrn: "", strn: "", inv: "124787", date: "2026-07-08", tax: 100, ex: 17070.9, sale: 20052 },
-            { party: "ALL IN ONE", ntrn: "5433385-4", strn: "3277876336899", inv: "124709", date: "2026-07-05", tax: 76, ex: 13025.25, sale: 15226 },
-            { party: "GAFOOR ARMY CANT", ntrn: "4342726-0", strn: "400434272612", inv: "124646", date: "2026-07-01", tax: 47, ex: 8097.12, sale: 9483 },
-            { party: "IDEAL MAGA MART", ntrn: "D782427-3", strn: "3630269195291", inv: "124922", date: "2026-07-14", tax: 152, ex: 26947.2, sale: 30479 },
-            { party: "AL NOOR MART QASIMBELLA", ntrn: "7188499", strn: "", inv: "124637", date: "2026-07-01", tax: 10, ex: 1773.08, sale: 2093 },
-            { party: "AL NOOR MART QASIMBELLA", ntrn: "7188499", strn: "", inv: "125070", date: "2026-07-22", tax: 18, ex: 3099.14, sale: 3583 },
-            { party: "GALAXY CLINIC MART BOSAN ROAD", ntrn: "0150979-9", strn: "3277876193881", inv: "124737", date: "2026-07-07", tax: 10, ex: 1647.48, sale: 1928 },
-            { party: "COSMETIC", ntrn: "1730513-6", strn: "363029277068-1", inv: "125052", date: "2026-07-21", tax: 12, ex: 1976.85, sale: 2386 },
-            { party: "AUOR SUPER MARKET", ntrn: "8353462-4", strn: "8353462", inv: "125172", date: "2026-07-28", tax: 1158, ex: 210695, sale: 231572 },
-            { party: "SUPER SWEET", ntrn: "0911371-4", strn: "911371", inv: "125139", date: "2026-07-27", tax: 22, ex: 3650.68, sale: 4345 },
-            { party: "GOLOO MART", ntrn: "", strn: "32102-4067623-7", inv: "124718", date: "2026-07-06", tax: 5, ex: 874.8, sale: 1036 },
-            { party: "GOLOO MART", ntrn: "", strn: "32102-4067623-7", inv: "125247", date: "2026-07-20", tax: 3, ex: 483.84, sale: 572 },
-            { party: "SHELL SELECT M3", ntrn: "8328602-3", strn: "", inv: "124830", date: "2026-07-11", tax: 5, ex: 874.8, sale: 1010 },
-            { party: "SHELL SELECT M3", ntrn: "8328602-3", strn: "", inv: "124837", date: "2026-07-11", tax: 24, ex: 4133.3, sale: 4771 },
-            { party: "MULTAN BACHAT STORE", ntrn: "", strn: "36302-1809429-3", inv: "125106", date: "2026-07-11", tax: 31, ex: 5347.78, sale: 6172 },
-            { party: "DREAM MART", ntrn: "", strn: "36302-1872442-1", inv: "125192", date: "2026-07-29", tax: 101, ex: 16980.3, sale: 20139 }
+        document.getElementById('userLoginBtn').onclick = function() {
+            loginUser('user');
+        };
+
+        document.getElementById('loginPass').onkeydown = function(e) {
+            if (e.key === 'Enter') {
+                attemptLogin();
+            }
+        };
+
+        document.getElementById('loginUser').onkeydown = function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('loginPass').focus();
+            }
+        };
+
+        // Pressing Enter (instead of clicking a specific Admin/User button)
+        // now checks the typed credentials against BOTH roles automatically,
+        // so the login form works correctly no matter how it's submitted.
+        function attemptLogin() {
+            var username = document.getElementById('loginUser').value.trim();
+            var password = document.getElementById('loginPass').value.trim();
+            var errorEl = document.getElementById('loginError');
+
+            errorEl.textContent = '';
+
+            if (!username || !password) {
+                errorEl.textContent = '⚠️ Please enter both username and password.';
+                return;
+            }
+
+            if (username === 'admin' && password === 'admin123') {
+                loginUser('admin');
+            } else if (username === 'user' && password === 'user123') {
+                loginUser('user');
+            } else {
+                errorEl.textContent = '❌ Invalid username or password.';
+                document.getElementById('loginPass').value = '';
+                document.getElementById('loginPass').focus();
+            }
+        }
+
+        function loginUser(role) {
+            var username = document.getElementById('loginUser').value.trim();
+            var password = document.getElementById('loginPass').value.trim();
+            var errorEl = document.getElementById('loginError');
+
+            errorEl.textContent = '';
+
+            if (!username || !password) {
+                errorEl.textContent = '⚠️ Please enter both username and password.';
+                return;
+            }
+
+            if (role === 'admin') {
+                if (username === 'admin' && password === 'admin123') {
+                    errorEl.textContent = '';
+                    saveLoginSession('admin');
+                    showApp('admin');
+                } else {
+                    errorEl.textContent = '❌ Invalid! Use: admin / admin123';
+                    document.getElementById('loginPass').value = '';
+                    document.getElementById('loginPass').focus();
+                }
+            } else if (role === 'user') {
+                if (username === 'user' && password === 'user123') {
+                    errorEl.textContent = '';
+                    saveLoginSession('user');
+                    showApp('user');
+                } else {
+                    errorEl.textContent = '❌ Invalid! Use: user / user123';
+                    document.getElementById('loginPass').value = '';
+                    document.getElementById('loginPass').focus();
+                }
+            }
+        }
+
+        function showApp(role) {
+            document.getElementById('loginOverlay').className = 'login-overlay hidden';
+            document.getElementById('mainContainer').className = 'container';
+
+            // Always pull the latest saved data at the moment of login.
+            // Without this, a tab that's been open for a while (or a
+            // second tab/window) keeps whatever it loaded originally in
+            // memory, even after another login elsewhere has since saved
+            // newer entries to storage — making "missing" data appear.
+            refreshDataFromStorage();
+
+            var isAdmin = (role === 'admin');
+            var appHtml = buildAppHTML(isAdmin);
+            document.getElementById('appContent').innerHTML = appHtml;
+
+            initApp(isAdmin);
+        }
+
+        function refreshDataFromStorage() {
+            fullData = loadSavedData();
+
+            try {
+                var savedParties = JSON.parse(localStorage.getItem(PARTY_STORAGE_KEY) || '{}');
+                if (savedParties && typeof savedParties === 'object') {
+                    Object.keys(savedParties).forEach(function(id) {
+                        if (id) partyDatabase[id] = savedParties[id];
+                    });
+                }
+            } catch (e) {
+                console.warn('Party database could not be refreshed:', e);
+            }
+        }
+
+        function buildAppHTML(isAdmin) {
+            var roleBadge = isAdmin ? '👑 Admin' : '👤 User';
+            var roleClass = isAdmin ? '' : 'user';
+            var noticeClass = isAdmin ? '' : 'visible';
+            var resetDisplay = isAdmin ? 'inline-flex' : 'none';
+            var readOnlyAttr = isAdmin ? '' : 'readonly';
+            var readOnlyClass = isAdmin ? '' : 'readonly-field';
+
+            return `
+                <div class="report-header">
+                    <h1>🍯 KIWI · ADVANCE TAX INVOICE</h1>
+                    <div class="header-actions">
+                        <span class="month-badge" id="monthBadge">📅 JULY 2026</span>
+                        <span class="user-role-badge ${roleClass}">${roleBadge}</span>
+                        <button class="btn" id="connectFileBtn">💾 Connect Local File</button>
+                        <button class="btn" id="downloadBackupBtn">⬇️ Download Backup</button>
+                        <button class="btn btn-primary" onclick="window.print()">🖨️ Print</button>
+                        <button class="logout-btn" onclick="doLogout()">🚪 Logout</button>
+                    </div>
+                </div>
+
+                <div class="file-sync-status" id="fileSyncStatus">
+                    <span class="dot"></span>
+                    <span id="fileSyncText">Not connected — data is saving to this browser only (localStorage).</span>
+                </div>
+
+                <div class="user-restriction-notice ${noticeClass}" id="userNotice">
+                    ⚠️ <strong>User Mode:</strong> You can only <strong>ADD</strong> new entries. Delete and Reset are disabled.
+                </div>
+
+                <div class="add-form" id="addForm">
+                    <div class="form-group">
+                        <label>Party ID</label>
+                        <input type="text" id="newPartyId" placeholder="e.g. 22034" />
+                        <div class="auto-hint" id="idHint"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Party Name</label>
+                        <input type="text" id="newParty" placeholder="Auto-filled" ${readOnlyAttr} class="${readOnlyClass}" />
+                        <div class="auto-hint" id="autoHint"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>NTRN</label>
+                        <input type="text" id="newNtrn" placeholder="Auto-filled" ${readOnlyAttr} class="${readOnlyClass}" />
+                    </div>
+                    <div class="form-group">
+                        <label>STRN</label>
+                        <input type="text" id="newStrn" placeholder="Auto-filled" ${readOnlyAttr} class="${readOnlyClass}" />
+                    </div>
+                    <div class="form-group">
+                        <label>Invoice #</label>
+                        <input type="text" id="newInv" placeholder="999999" />
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="newDate" />
+                    </div>
+                    <div class="form-group">
+                        <label>Advance Tax</label>
+                        <input type="number" id="newTax" placeholder="0" step="1" />
+                    </div>
+                    <div class="form-group">
+                        <label>EX VALUE</label>
+                        <input type="number" id="newEx" placeholder="0.00" step="0.01" />
+                    </div>
+                    <div class="form-group">
+                        <label>TOTAL SALE</label>
+                        <input type="number" id="newSale" placeholder="0" step="1" />
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-success" id="addEntryBtn">➕ Add</button>
+                        <button class="btn btn-danger" id="resetDataBtn" style="display:${resetDisplay}">↺ Reset</button>
+                    </div>
+                </div>
+
+                <div class="date-filter-section" id="dateFilterSection">
+                    <label>📅 Date Range</label>
+                    <input type="date" id="dateFrom" />
+                    <span class="date-range-sep">to</span>
+                    <input type="date" id="dateTo" />
+                    <button class="btn-filter" id="applyDateFilter">Apply</button>
+                    <button class="btn-clear-date" id="clearDateFilter">✕ Clear</button>
+                    <span class="result-count" id="dateFilterCount"></span>
+                </div>
+
+                <div class="search-section" id="searchSection">
+                    <label for="partySearch">🔍 Party</label>
+                    <div class="search-input-wrapper">
+                        <input type="text" id="partySearch" placeholder="Type party name or ID...">
+                        <button id="searchBtn">Search</button>
+                        <button class="search-clear" id="clearSearch">✕</button>
+                    </div>
+                    <span class="result-count" id="resultCount">42 entries</span>
+                </div>
+
+                <div class="summary-cards" id="summaryCards">
+                    <div class="summary-item"><span class="label">🧾 Total invoices</span><span class="value" id="totalInvoices">42</span></div>
+                    <div class="summary-item"><span class="label">💰 Advance Tax</span><span class="value" id="totalTax">0</span></div>
+                    <div class="summary-item"><span class="label">📊 EX VALUE</span><span class="value" id="totalExValue">0</span></div>
+                    <div class="summary-item"><span class="label">💵 TOTAL SALE</span><span class="value" id="totalSale">0</span></div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Party ID</th>
+                                <th>Party Name</th>
+                                <th>NTRN</th>
+                                <th>STRN</th>
+                                <th>Invoice #</th>
+                                <th>Date</th>
+                                <th class="text-right">Advance Tax</th>
+                                <th class="text-right">EX VALUE</th>
+                                <th class="text-right">TOTAL SALE</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoiceTableBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="footer-note">
+                    <span>📌 Non‑zero entries · <span id="footerMonthLabel">July 2026</span></span>
+                    <span>⏱️ report generated · <span id="reportGeneratedDate">23 Aug 2026</span></span>
+                </div>
+                <div class="footer-credits">
+                    <span>Report generated by: Hammad Sales Agency Multan</span>
+                    <span>Designed by: Malik Mubashir Khokhar</span>
+                </div>
+            `;
+        }
+
+        // ============================================================
+        // ALL 42 PARTIES DATA
+        // ============================================================
+
+        var partyDatabase = {
+            '22034': { name: 'IDEAL SUPER MALL BOSAN ROAD', ntrn: '5527785-3', strn: '327787619200-4' },
+            '22038': { name: 'LATIF S/S GULGASHT', ntrn: '4302495-5', strn: '312016393391-5' },
+            '22033': { name: 'IDEAL MALL CHUNGI#6', ntrn: '7582544-8', strn: '327787614826-4' },
+            '23129': { name: 'FRESHCO SWEETS & BAKERS BOSAN ROAD', ntrn: '', strn: '' },
+            '22369': { name: 'TREND STORE GULGASHT', ntrn: '1309897-7', strn: '40013098971-9' },
+            '22110': { name: 'FIYAZ MART BOSAN ROAD', ntrn: '1749512-1', strn: '327787618368-2' },
+            '22056': { name: 'KK MART BOSAN ROAD', ntrn: '7197572-2', strn: '327787616144-3' },
+            '22137': { name: 'KK MART HUSSAIN AGHAI', ntrn: '7197572-2', strn: '327787616144-3' },
+            '23285': { name: 'AL RAFFAY HYPER MART GULSHAN M', ntrn: '4648779', strn: '4648779-00' },
+            '23697': { name: 'FOOD FESTIVAL KHANEWAL ROAD', ntrn: '1480015-2', strn: '327787624146-8' },
+            '22602': { name: 'D MARINA BOSAN ROAD', ntrn: '9385097-5', strn: '938509-7' },
+            '22049': { name: 'PRINCE D/S CANTT', ntrn: '', strn: '' },
+            '22154': { name: 'PERFUME PALACE CANTT', ntrn: '0122268-6', strn: '363027610587-3' },
+            '22036': { name: 'BAKHT MART MODEL TOWN', ntrn: '5124957-6', strn: '3277876172314' },
+            '22954': { name: 'BEST ONE STORE BUCH VILLAS', ntrn: 'D188987-5', strn: 'D188987' },
+            '22031': { name: 'JK MART OLD SHUJAABD ROAD', ntrn: '', strn: '3630206374537' },
+            '22188': { name: 'BEHRIA S/S QASIM BELA', ntrn: '3630279332553', strn: '79332553' },
+            '22341': { name: 'TESCO MART TANK CHOWK', ntrn: '1826721-1', strn: '36302-2906795-0' },
+            '22032': { name: 'GIFT POINT SHAREEF PALAZA', ntrn: '', strn: '' },
+            '24931': { name: 'ALL IN SUPER MART MPS CHOWK', ntrn: '', strn: '' },
+            '22368': { name: 'GHAFOOR ARMY CANTT', ntrn: '4342726-0', strn: '400434272612' },
+            '25466': { name: 'IDEAL MAGA MART MODEL TOWN', ntrn: '', strn: '' },
+            '25470': { name: 'AL NOOR MART QASIM BILLA', ntrn: '', strn: '' },
+            '25767': { name: 'GALAXY CLINIC MART BOSAN ROAD', ntrn: '0150979-9', strn: '3277876193881' },
+            '25952': { name: 'AUOR SUPER MARKET SP CHOWK', ntrn: '8353462-4', strn: '8353462' },
+            '23809': { name: 'MULTAN BACHAT BAZAR BAGH HUSSAIN CHOWK', ntrn: '', strn: '36302-1809429-3' },
+            // Additional parties that were in original code but not in database
+            '': { name: '4 EVER BAKERS TARIQ ROAD', ntrn: '3525569-2', strn: '36304671934' },
+            '': { name: 'SHAH RUKN-E-ALAM', ntrn: '230123-2', strn: '3630270276253' },
+            '': { name: '711 DHA', ntrn: '4729545-0', strn: '32402-9637719-3' },
+            '': { name: 'COSMETIC', ntrn: '1730513-6', strn: '363029277068-1' },
+            '': { name: 'SUPER SWEET', ntrn: '0911371-4', strn: '911371' },
+            '': { name: 'GOLOO MART', ntrn: '', strn: '32102-4067623-7' },
+            '': { name: 'SHELL SELECT M3', ntrn: '8328602-3', strn: '' },
+            '': { name: 'DREAM MART', ntrn: '', strn: '36302-1872442-1' }
+        };
+
+        // ============================================================
+        // ALL 42 INITIAL DATA ENTRIES        // ============================================================
+
+        var initialData = [
+            { partyId: '22034', party: 'IDEAL SUPER MALL BOSAN ROAD', ntrn: '5527785-3', strn: '327787619200-4', inv: '125174', date: '2026-07-28', tax: 290, ex: 49425.18, sale: 57935 },
+            { partyId: '22038', party: 'LATIF S/S GULGASHT', ntrn: '4302495-5', strn: '312016393391-5', inv: '124684', date: '2026-07-04', tax: 2468, ex: 451927.3, sale: 493688 },
+            { partyId: '22038', party: 'LATIF S/S GULGASHT', ntrn: '4302495-5', strn: '312016393391-5', inv: '124735', date: '2026-07-07', tax: 280, ex: 5133.6, sale: 56047 },
+            { partyId: '22038', party: 'LATIF S/S GULGASHT', ntrn: '4302495-5', strn: '312016393391-5', inv: '125206', date: '2026-07-30', tax: 2103, ex: 389083.3, sale: 420539 },
+            { partyId: '22033', party: 'IDEAL MALL CHUNGI#6', ntrn: '7582544-8', strn: '327787614826-4', inv: '124923', date: '2026-07-14', tax: 254, ex: 45009.69, sale: 50833 },
+            { partyId: '23129', party: 'FRESHCO SWEETS & BAKERS BOSAN ROAD', ntrn: '', strn: '', inv: '125123', date: '2026-07-25', tax: 108, ex: 19950.08, sale: 21677 },
+            { partyId: '22369', party: 'TREND STORE GULGASHT', ntrn: '1309897-7', strn: '40013098971-9', inv: '124734', date: '2026-07-07', tax: 633, ex: 108200.1, sale: 126591 },
+            { partyId: '22110', party: 'FIYAZ MART BOSAN ROAD', ntrn: '1749512-1', strn: '327787618368-2', inv: '124924', date: '2026-07-14', tax: 93, ex: 15981.18, sale: 18549 },
+            { partyId: '22056', party: 'KK MART BOSAN ROAD', ntrn: '7197572-2', strn: '327787616144-3', inv: '124644', date: '2026-07-01', tax: 871, ex: 154341.3, sale: 174265 },
+            { partyId: '22056', party: 'KK MART BOSAN ROAD', ntrn: '7197572-2', strn: '327787616144-3', inv: '124926', date: '2026-07-14', tax: 94, ex: 16418.82, sale: 18803 },
+            { partyId: '22137', party: 'KK MART HUSSAIN AGHAI', ntrn: '7197572-2', strn: '327787616144-3', inv: '125107', date: '2026-07-23', tax: 488, ex: 86605.32, sale: 97506 },
+            { partyId: '23285', party: 'AL RAFFAY HYPER MART GULSHAN M', ntrn: '4648779', strn: '4648779-00', inv: '125205', date: '2026-07-30', tax: 263, ex: 48333.89, sale: 52581 },
+            { partyId: '23697', party: 'FOOD FESTIVAL KHANEWAL ROAD', ntrn: '1480015-2', strn: '327787624146-8', inv: '124708', date: '2026-07-05', tax: 262, ex: 44662.05, sale: 52314 },
+            { partyId: '22602', party: 'D MARINA BOSAN ROAD', ntrn: '9385097-5', strn: '938509-7', inv: '125088', date: '2026-07-22', tax: 144, ex: 25474.89, sale: 28854 },
+            { partyId: '22049', party: 'PRINCE D/S CANTT', ntrn: '', strn: '', inv: '125194', date: '2026-07-29', tax: 243, ex: 42227.76, sale: 48691 },
+            { partyId: '22154', party: 'PERFUME PALACE CANTT', ntrn: '0122268-6', strn: '363027610587-3', inv: '124953', date: '2026-07-15', tax: 204, ex: 35221.02, sale: 40770 },
+            { partyId: '22036', party: 'BAKHT MART MODEL TOWN', ntrn: '5124957-6', strn: '3277876172314', inv: '125067', date: '2026-07-21', tax: 547, ex: 94665.92, sale: 109365 },
+            { partyId: '22954', party: 'BEST ONE STORE BUCH VILLAS', ntrn: 'D188987-5', strn: 'D188987', inv: '125054', date: '2026-07-21', tax: 19, ex: 3233.46, sale: 3809 },
+            { partyId: '22031', party: 'JK MART OLD SHUJAABD ROAD', ntrn: '', strn: '3630206374537', inv: '124649', date: '2026-07-01', tax: 294, ex: 51272.25, sale: 58898 },
+            { partyId: '22031', party: 'JK MART OLD SHUJAABD ROAD', ntrn: '', strn: '3630206374537', inv: '124731', date: '2026-07-06', tax: 46, ex: 7986.69, sale: 9152 },
+            { partyId: '22031', party: 'JK MART OLD SHUJAABD ROAD', ntrn: '', strn: '', inv: '125090', date: '2026-07-22', tax: 25, ex: 4680.27, sale: 5093 },
+            { partyId: '22188', party: 'BEHRIA S/S QASIM BELA', ntrn: '3630279332553', strn: '79332553', inv: '125089', date: '2026-07-22', tax: 340, ex: 58547.12, sale: 68041 },
+            { partyId: '', party: '4 EVER BAKERS TARIQ ROAD', ntrn: '3525569-2', strn: '36304671934', inv: '124789', date: '2026-07-08', tax: 97, ex: 16773.24, sale: 19453 },
+            { partyId: '22341', party: 'TESCO MART TANK CHOWK', ntrn: '1826721-1', strn: '36302-2906795-0', inv: '124791', date: '2026-07-08', tax: 43, ex: 7441.85, sale: 8685 },
+            { partyId: '', party: 'SHAH RUKN-E-ALAM', ntrn: '230123-2', strn: '3630270276253', inv: '124983', date: '2026-07-16', tax: 150, ex: 27260.4, sale: 30059 },
+            { partyId: '', party: '711 DHA', ntrn: '4729545-0', strn: '32402-9637719-3', inv: '12068', date: '2026-07-21', tax: 178, ex: 30943.6, sale: 35606 },
+            { partyId: '22032', party: 'GIFT POINT SHAREEF PALAZA', ntrn: '', strn: '', inv: '124787', date: '2026-07-08', tax: 100, ex: 17070.9, sale: 20052 },
+            { partyId: '24931', party: 'ALL IN SUPER MART MPS CHOWK', ntrn: '', strn: '', inv: '124709', date: '2026-07-05', tax: 76, ex: 13025.25, sale: 15226 },
+            { partyId: '22368', party: 'GHAFOOR ARMY CANTT', ntrn: '4342726-0', strn: '400434272612', inv: '124646', date: '2026-07-01', tax: 47, ex: 8097.12, sale: 9483 },
+            { partyId: '25466', party: 'IDEAL MAGA MART MODEL TOWN', ntrn: '', strn: '', inv: '124922', date: '2026-07-14', tax: 152, ex: 26947.2, sale: 30479 },
+            { partyId: '25470', party: 'AL NOOR MART QASIM BILLA', ntrn: '', strn: '', inv: '124637', date: '2026-07-01', tax: 10, ex: 1773.08, sale: 2093 },
+            { partyId: '25470', party: 'AL NOOR MART QASIM BILLA', ntrn: '', strn: '', inv: '125070', date: '2026-07-22', tax: 18, ex: 3099.14, sale: 3583 },
+            { partyId: '25767', party: 'GALAXY CLINIC MART BOSAN ROAD', ntrn: '0150979-9', strn: '3277876193881', inv: '124737', date: '2026-07-07', tax: 10, ex: 1647.48, sale: 1928 },
+            { partyId: '', party: 'COSMETIC', ntrn: '1730513-6', strn: '363029277068-1', inv: '125052', date: '2026-07-21', tax: 12, ex: 1976.85, sale: 2386 },
+            { partyId: '25952', party: 'AUOR SUPER MARKET SP CHOWK', ntrn: '8353462-4', strn: '8353462', inv: '125172', date: '2026-07-28', tax: 1158, ex: 210695, sale: 231572 },
+            { partyId: '', party: 'SUPER SWEET', ntrn: '0911371-4', strn: '911371', inv: '125139', date: '2026-07-27', tax: 22, ex: 3650.68, sale: 4345 },
+            { partyId: '', party: 'GOLOO MART', ntrn: '', strn: '32102-4067623-7', inv: '124718', date: '2026-07-06', tax: 5, ex: 874.8, sale: 1036 },
+            { partyId: '', party: 'GOLOO MART', ntrn: '', strn: '32102-4067623-7', inv: '125247', date: '2026-07-20', tax: 3, ex: 483.84, sale: 572 },
+            { partyId: '', party: 'SHELL SELECT M3', ntrn: '8328602-3', strn: '', inv: '124830', date: '2026-07-11', tax: 5, ex: 874.8, sale: 1010 },
+            { partyId: '', party: 'SHELL SELECT M3', ntrn: '8328602-3', strn: '', inv: '124837', date: '2026-07-11', tax: 24, ex: 4133.3, sale: 4771 },
+            { partyId: '23809', party: 'MULTAN BACHAT BAZAR BAGH HUSSAIN CHOWK', ntrn: '', strn: '36302-1809429-3', inv: '125106', date: '2026-07-11', tax: 31, ex: 5347.78, sale: 6172 },
+            { partyId: '', party: 'DREAM MART', ntrn: '', strn: '36302-1872442-1', inv: '125192', date: '2026-07-29', tax: 101, ex: 16980.3, sale: 20139 }
         ];
 
-        // ----- STATE -----
-        let fullData = [];
-        let nextId = 1;
-        let currentUser = null;
-        let editingRowId = null;
-        let dateFilter = { from: null, to: null };
+        var STORAGE_KEY = 'kiwi_tax_invoice_july_2026_v4';
+        var PARTY_STORAGE_KEY = 'kiwi_party_database_v4';
+        var LOGIN_STORAGE_KEY = 'kiwi_tax_invoice_login_v1';
 
-        // ----- DOM refs -----
-        const loginOverlay = document.getElementById('loginOverlay');
-        const loginUsername = document.getElementById('loginUsername');
-        const loginPassword = document.getElementById('loginPassword');
-        const loginBtn = document.getElementById('loginBtn');
-        const loginError = document.getElementById('loginError');
+        // Load saved entries if available; otherwise use the original 42 entries.
+        var fullData = loadSavedData();
+        var isAdmin = false;
 
-        const currentUsername = document.getElementById('currentUsername');
-        const currentRoleTag = document.getElementById('currentRoleTag');
-        const logoutBtn = document.getElementById('logoutBtn');
+        function loadSavedData() {
+            try {
+                var saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    var parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed)) return parsed;
+                }
+            } catch (e) {
+                console.warn('Saved data could not be loaded:', e);
+            }
+            return JSON.parse(JSON.stringify(initialData));
+        }
 
-        const tbody = document.getElementById('invoiceTableBody');
-        const searchInput = document.getElementById('partySearch');
-        const searchBtn = document.getElementById('searchBtn');
-        const clearBtn = document.getElementById('clearSearch');
-        const resultCount = document.getElementById('resultCount');
-
-        // Date filter elements
-        const fromDate = document.getElementById('fromDate');
-        const toDate = document.getElementById('toDate');
-        const dateFilterBtn = document.getElementById('dateFilterBtn');
-        const clearDateFilter = document.getElementById('clearDateFilter');
-        const dateRangeBadge = document.getElementById('dateRangeBadge');
-
-        const totalInvEl = document.getElementById('totalInvoices');
-        const totalTaxEl = document.getElementById('totalTax');
-        const totalExEl = document.getElementById('totalExValue');
-        const totalSaleEl = document.getElementById('totalSale');
-
-        const newParty = document.getElementById('newParty');
-        const newNtrn = document.getElementById('newNtrn');
-        const newStrn = document.getElementById('newStrn');
-        const newInv = document.getElementById('newInv');
-        const newDate = document.getElementById('newDate');
-        const newTax = document.getElementById('newTax');
-        const newEx = document.getElementById('newEx');
-        const newSale = document.getElementById('newSale');
-        const addBtn = document.getElementById('addEntryBtn');
-        const resetBtn = document.getElementById('resetDataBtn');
-        const partyMatchStatus = document.getElementById('partyMatchStatus');
-
-        const editModal = document.getElementById('editModal');
-        const editParty = document.getElementById('editParty');
-        const editNtrn = document.getElementById('editNtrn');
-        const editStrn = document.getElementById('editStrn');
-        const editInv = document.getElementById('editInv');
-        const editDate = document.getElementById('editDate');
-        const editTax = document.getElementById('editTax');
-        const editEx = document.getElementById('editEx');
-        const editSale = document.getElementById('editSale');
-        const editSaveBtn = document.getElementById('editSaveBtn');
-        const editCancelBtn = document.getElementById('editCancelBtn');
-
-        // ----- LOCALSTORAGE FUNCTIONS -----
         function saveData() {
             try {
-                localStorage.setItem('kiwi_invoice_data', JSON.stringify(fullData));
-            } catch (e) {}
-        }
-
-        function loadData() {
-            try {
-                const saved = localStorage.getItem('kiwi_invoice_data');
-                if (saved) {
-                    const parsed = JSON.parse(saved);
-                    if (Array.isArray(parsed) && parsed.length > 0) {
-                        return parsed;
-                    }
-                }
-            } catch (e) {}
-            return null;
-        }
-
-        function saveUserSession() {
-            if (currentUser) {
-                try {
-                    localStorage.setItem('kiwi_user_session', JSON.stringify(currentUser));
-                } catch (e) {}
-            }
-        }
-
-        function loadUserSession() {
-            try {
-                const saved = localStorage.getItem('kiwi_user_session');
-                if (saved) {
-                    return JSON.parse(saved);
-                }
-            } catch (e) {}
-            return null;
-        }
-
-        function clearUserSession() {
-            localStorage.removeItem('kiwi_user_session');
-        }
-
-        // ----- HELPERS -----
-        function formatNumber(n) {
-            return n.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-        }
-
-        function formatCurrency(n) {
-            return n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-
-        function computeTotals(data) {
-            let inv = data.length;
-            let tax = 0, ex = 0, sale = 0;
-            data.forEach(r => {
-                tax += r.tax || 0;
-                ex += r.ex || 0;
-                sale += r.sale || 0;
-            });
-            return { inv, tax, ex, sale };
-        }
-
-        function findPartyDetails(partyName) {
-            const trimmed = partyName.trim().toLowerCase();
-            if (!trimmed) return null;
-            const match = fullData.find(row => row.party.toLowerCase() === trimmed);
-            if (match) {
-                return { ntrn: match.ntrn || '', strn: match.strn || '' };
-            }
-            const partial = fullData.find(row => row.party.toLowerCase().includes(trimmed) || trimmed.includes(row.party.toLowerCase()));
-            if (partial) {
-                return { ntrn: partial.ntrn || '', strn: partial.strn || '' };
-            }
-            return null;
-        }
-
-        function autoFillNTRNSTRN() {
-            const partyName = newParty.value;
-            const details = findPartyDetails(partyName);
-            if (details) {
-                newNtrn.value = details.ntrn;
-                newStrn.value = details.strn;
-                partyMatchStatus.innerHTML = '✅ <span style="color:#0f7b3e;">Auto-filled from existing party</span>';
-                return true;
-            } else if (partyName.trim().length > 0) {
-                partyMatchStatus.innerHTML = 'ℹ️ <span style="color:#6e879b;">New party - enter NTN/STRN manually</span>';
-                return false;
-            } else {
-                partyMatchStatus.innerHTML = '';
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(fullData));
+                localStorage.setItem(PARTY_STORAGE_KEY, JSON.stringify(partyDatabase));
+            } catch (e) {
+                console.error('Data could not be saved to localStorage:', e);
+                alert('⚠️ Browser storage is blocked. Please allow site data/local storage for this HTML file in Chrome.');
                 return false;
             }
+            // If the user has connected a local file, mirror every save to it automatically.
+            writeToLocalFile();
+            return true;
         }
 
-        function isAdmin() {
-            return currentUser && currentUser.role === 'admin';
+        // ============================================================
+        // LOCAL FILE SYNC (File System Access API)
+        // ------------------------------------------------------------
+        // Lets the user pick a real .json file on their own disk once.
+        // From then on, every add/delete writes straight to that file —
+        // no re-prompting, no manual export/import. Chrome/Edge only;
+        // other browsers silently fall back to localStorage-only mode.
+        // ============================================================
+
+        var localFileHandle = null;
+
+        function fileSyncSupported() {
+            return typeof window.showSaveFilePicker === 'function';
         }
 
-        // ----- FILTER FUNCTIONS -----
-        function applyDateFilter() {
-            const from = fromDate.value;
-            const to = toDate.value;
+        function updateFileSyncStatus(connected, label) {
+            var bar = document.getElementById('fileSyncStatus');
+            var text = document.getElementById('fileSyncText');
+            var btn = document.getElementById('connectFileBtn');
+            if (!bar || !text) return;
 
-            if (from && to) {
-                if (from > to) {
-                    alert('"From Date" cannot be greater than "To Date".');
-                    return;
-                }
-                dateFilter.from = from;
-                dateFilter.to = to;
-                dateRangeBadge.style.display = 'inline-block';
-                dateRangeBadge.textContent = `📆 ${from.replace(/-/g, '/')} → ${to.replace(/-/g, '/')}`;
-            } else if (from && !to) {
-                dateFilter.from = from;
-                dateFilter.to = null;
-                dateRangeBadge.style.display = 'inline-block';
-                dateRangeBadge.textContent = `📆 From: ${from.replace(/-/g, '/')}`;
-            } else if (!from && to) {
-                dateFilter.from = null;
-                dateFilter.to = to;
-                dateRangeBadge.style.display = 'inline-block';
-                dateRangeBadge.textContent = `📆 To: ${to.replace(/-/g, '/')}`;
+            if (connected) {
+                bar.className = 'file-sync-status connected';
+                text.textContent = '✅ Synced to local file: ' + (label || 'connected file') + ' — every change saves here automatically.';
+                if (btn) btn.textContent = '🔄 Change File';
             } else {
-                clearDateFilterFunc();
+                bar.className = 'file-sync-status';
+                text.textContent = fileSyncSupported()
+                    ? 'Not connected — data is saving to this browser only (localStorage). Click "Connect Local File" to also save to a real file on your drive.'
+                    : 'Local file sync needs Chrome or Edge. Data is currently saving to this browser only (localStorage).';
+                if (btn) btn.textContent = '💾 Connect Local File';
+            }
+        }
+
+        async function connectLocalFile() {
+            if (!fileSyncSupported()) {
+                alert('⚠️ Your browser does not support direct file saving. Please use Chrome or Edge for this feature.\n\nYour data is still safe in this browser\'s local storage.');
                 return;
             }
-
-            applyFilter();
+            try {
+                localFileHandle = await window.showSaveFilePicker({
+                    suggestedName: 'kiwi_tax_invoice_backup.json',
+                    types: [{
+                        description: 'JSON File',
+                        accept: { 'application/json': ['.json'] }
+                    }]
+                });
+                var perm = await localFileHandle.requestPermission({ mode: 'readwrite' });
+                if (perm !== 'granted') {
+                    alert('⚠️ Permission was not granted, so local file sync is off.');
+                    localFileHandle = null;
+                    updateFileSyncStatus(false);
+                    return;
+                }
+                // Write current data immediately so the file is populated right away.
+                await writeToLocalFile();
+                updateFileSyncStatus(true, localFileHandle.name);
+            } catch (e) {
+                // User cancelled the picker — not an error worth alarming them about.
+                if (e && e.name !== 'AbortError') {
+                    console.error('Could not connect local file:', e);
+                }
+            }
         }
 
-        function clearDateFilterFunc() {
-            dateFilter.from = null;
-            dateFilter.to = null;
-            fromDate.value = '';
-            toDate.value = '';
-            dateRangeBadge.style.display = 'none';
-            applyFilter();
+        async function writeToLocalFile() {
+            if (!localFileHandle) return;
+            try {
+                var payload = {
+                    savedAt: new Date().toISOString(),
+                    invoices: fullData,
+                    parties: partyDatabase
+                };
+                var writable = await localFileHandle.createWritable();
+                await writable.write(JSON.stringify(payload, null, 2));
+                await writable.close();
+            } catch (e) {
+                console.error('Could not write to local file:', e);
+                updateFileSyncStatus(false);
+                localFileHandle = null;
+                alert('⚠️ Lost access to the local file. Please click "Connect Local File" again.');
+            }
         }
 
-        function filterData(query) {
-            let filtered = fullData.slice();
+        // ------------------------------------------------------------
+        // Universal backup download — works on every browser and OS,
+        // including Android/iOS where the File System Access API above
+        // is not available. Saves a single JSON snapshot to Downloads.
+        // ------------------------------------------------------------
+        function downloadBackup() {
+            var payload = {
+                savedAt: new Date().toISOString(),
+                invoices: fullData,
+                parties: partyDatabase
+            };
+            var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            var stamp = new Date().toISOString().slice(0, 10);
+            a.href = url;
+            a.download = 'kiwi_tax_invoice_backup_' + stamp + '.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
 
-            // Apply date filter
-            if (dateFilter.from || dateFilter.to) {
-                filtered = filtered.filter(row => {
-                    if (!row.date) return true;
-                    const rowDate = row.date;
-                    if (dateFilter.from && dateFilter.to) {
-                        return rowDate >= dateFilter.from && rowDate <= dateFilter.to;
-                    } else if (dateFilter.from) {
-                        return rowDate >= dateFilter.from;
-                    } else if (dateFilter.to) {
-                        return rowDate <= dateFilter.to;
-                    }
-                    return true;
+        function saveLoginSession(role) {
+            try {
+                localStorage.setItem(LOGIN_STORAGE_KEY, JSON.stringify({
+                    role: role,
+                    savedAt: new Date().getTime()
+                }));
+            } catch (e) {
+                console.warn('Login session could not be saved:', e);
+            }
+        }
+
+        function getLoginSession() {
+            try {
+                var saved = localStorage.getItem(LOGIN_STORAGE_KEY);
+                if (!saved) return null;
+                var session = JSON.parse(saved);
+                if (session && (session.role === 'admin' || session.role === 'user')) return session.role;
+            } catch (e) {
+                console.warn('Login session could not be loaded:', e);
+            }
+            return null;
+        }
+
+        function clearLoginSession() {
+            try {
+                localStorage.removeItem(LOGIN_STORAGE_KEY);
+            } catch (e) {
+                console.warn('Login session could not be cleared:', e);
+            }
+        }
+
+        // Merge previously saved party details into the built-in database.
+        try {
+            var savedParties = JSON.parse(localStorage.getItem(PARTY_STORAGE_KEY) || '{}');
+            if (savedParties && typeof savedParties === 'object') {
+                Object.keys(savedParties).forEach(function(id) {
+                    if (id) partyDatabase[id] = savedParties[id];
                 });
             }
+        } catch (e) {
+            console.warn('Party database could not be loaded:', e);
+        }
 
-            // Apply search filter
-            const q = query.trim().toLowerCase();
-            if (q) {
-                filtered = filtered.filter(row => row.party.toLowerCase().includes(q));
+        // ============================================================
+        // INIT APP
+        // ============================================================
+
+        // ============================================================
+        // AUTO-UPDATING DATES (month badge + footer "report generated")
+        // ------------------------------------------------------------
+        // Both are computed fresh from the system clock every time the
+        // page loads/refreshes, so August, September, etc. take over
+        // automatically — nothing to edit by hand each month.
+        // ============================================================
+
+        var MONTH_NAMES = ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE',
+            'JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];
+        var MONTH_NAMES_SHORT = ['Jan','Feb','Mar','Apr','May','Jun',
+            'Jul','Aug','Sep','Oct','Nov','Dec'];
+
+        function updateHeaderDates(today) {
+            today = today || new Date();
+
+            var badge = document.getElementById('monthBadge');
+            if (badge) {
+                badge.textContent = '📅 ' + MONTH_NAMES[today.getMonth()] + ' ' + today.getFullYear();
             }
 
-            return filtered;
-        }
-
-        function applyFilter() {
-            const query = searchInput.value;
-            const filtered = filterData(query);
-            renderTable(filtered);
-            resultCount.textContent = filtered.length + (filtered.length === 1 ? ' entry' : ' entries');
-        }
-
-        // ----- RENDER FUNCTIONS -----
-        function renderTable(data) {
-            if (!data || data.length === 0) {
-                tbody.innerHTML = `<tr class="empty-row"><td colspan="9">No matching invoices found</td></tr>`;
-                return;
+            var genDate = document.getElementById('reportGeneratedDate');
+            if (genDate) {
+                genDate.textContent = today.getDate() + ' ' + MONTH_NAMES_SHORT[today.getMonth()] + ' ' + today.getFullYear();
             }
 
-            const admin = isAdmin();
-            let html = '';
-            data.forEach(row => {
-                const dateFormatted = row.date ? row.date.replace(/-/g, '/') : '—';
-                const rowId = row._id;
-                html += `<tr data-row-id="${rowId}">
-                    <td class="text-center">
-                        ${admin ? `<button class="edit-btn" onclick="editEntry(${rowId})">✏️</button>` : ''}
-                        ${admin ? `<button class="delete-btn" onclick="deleteEntry(${rowId})">✕</button>` : '<span style="color:#9aafbe;font-size:0.7rem;">🔒</span>'}
-                    </td>
-                    <td class="party-name">${row.party}</td>
-                    <td>${row.ntrn || '—'}</td>
-                    <td>${row.strn || '—'}</td>
-                    <td><span class="invoice-count">${row.inv}</span></td>
-                    <td>${dateFormatted}</td>
-                    <td class="text-right">${row.tax}</td>
-                    <td class="text-right">${formatCurrency(row.ex)}</td>
-                    <td class="text-right">${formatNumber(row.sale)}</td>
-                </tr>`;
-            });
-
-            const totals = computeTotals(data);
-            html += `<tr class="total-row">
-                <td colspan="6" style="text-align:right; font-weight:600;">TOTAL (filtered)</td>
-                <td class="text-right">${formatNumber(totals.tax)}</td>
-                <td class="text-right">${formatCurrency(totals.ex)}</td>
-                <td class="text-right">${formatNumber(totals.sale)}</td>
-            </tr>`;
-
-            tbody.innerHTML = html;
-        }
-
-        function updateSummaryCards() {
-            const totals = computeTotals(fullData);
-            totalInvEl.textContent = totals.inv;
-            totalTaxEl.textContent = formatNumber(totals.tax);
-            totalExEl.textContent = formatNumber(totals.ex);
-            totalSaleEl.textContent = formatNumber(totals.sale);
-        }
-
-        function updateUIForRole() {
-            const admin = isAdmin();
-            const formInputs = document.querySelectorAll('#addForm input');
-            const addButton = document.getElementById('addEntryBtn');
-            const resetButton = document.getElementById('resetDataBtn');
-
-            formInputs.forEach(input => {
-                input.disabled = !admin;
-            });
-            addButton.disabled = !admin;
-            resetButton.disabled = !admin;
-
-            document.getElementById('addForm').style.opacity = admin ? '1' : '0.6';
-
-            if (currentUser) {
-                currentUsername.textContent = currentUser.username;
-                currentRoleTag.textContent = currentUser.role.toUpperCase();
-                currentRoleTag.className = 'role-tag ' + (currentUser.role === 'admin' ? 'admin-tag' : 'user-tag');
+            var footerMonth = document.getElementById('footerMonthLabel');
+            if (footerMonth) {
+                var monthName = MONTH_NAMES[today.getMonth()];
+                var properCase = monthName.charAt(0) + monthName.slice(1).toLowerCase();
+                footerMonth.textContent = properCase + ' ' + today.getFullYear();
             }
         }
 
-        // ----- CRUD OPERATIONS -----
-        window.deleteEntry = function(rowId) {
-            if (!isAdmin()) return;
+        function initApp(admin) {
+            isAdmin = admin;
 
-            const index = fullData.findIndex(row => row._id === rowId);
-            if (index === -1) return;
+            var connectFileBtn = document.getElementById('connectFileBtn');
+            if (connectFileBtn) connectFileBtn.onclick = connectLocalFile;
+            var downloadBackupBtn = document.getElementById('downloadBackupBtn');
+            if (downloadBackupBtn) downloadBackupBtn.onclick = downloadBackup;
+            updateFileSyncStatus(!!localFileHandle, localFileHandle ? localFileHandle.name : null);
 
-            const row = fullData[index];
-            if (confirm(`Delete invoice #${row.inv} for "${row.party}"?`)) {
-                fullData.splice(index, 1);
-                saveData();
-                updateSummaryCards();
-                applyFilter();
-                autoFillNTRNSTRN();
-            }
-        };
+            var tbody = document.getElementById('invoiceTableBody');
+            var searchInput = document.getElementById('partySearch');
+            var searchBtn = document.getElementById('searchBtn');
+            var clearBtn = document.getElementById('clearSearch');
+            var resultCount = document.getElementById('resultCount');
 
-        window.editEntry = function(rowId) {
-            if (!isAdmin()) return;
+            var dateFrom = document.getElementById('dateFrom');
+            var dateTo = document.getElementById('dateTo');
+            var applyDateFilter = document.getElementById('applyDateFilter');
+            var clearDateFilterBtn = document.getElementById('clearDateFilter');
+            var dateFilterCount = document.getElementById('dateFilterCount');
 
-            const row = fullData.find(r => r._id === rowId);
-            if (!row) return;
+            var totalInvEl = document.getElementById('totalInvoices');
+            var totalTaxEl = document.getElementById('totalTax');
+            var totalExEl = document.getElementById('totalExValue');
+            var totalSaleEl = document.getElementById('totalSale');
 
-            editingRowId = rowId;
-            editParty.value = row.party;
-            editNtrn.value = row.ntrn || '';
-            editStrn.value = row.strn || '';
-            editInv.value = row.inv;
-            editDate.value = row.date || '';
-            editTax.value = row.tax;
-            editEx.value = row.ex;
-            editSale.value = row.sale;
+            var newPartyId = document.getElementById('newPartyId');
+            var newParty = document.getElementById('newParty');
+            var newNtrn = document.getElementById('newNtrn');
+            var newStrn = document.getElementById('newStrn');
+            var newInv = document.getElementById('newInv');
+            var newDate = document.getElementById('newDate');
+            var newTax = document.getElementById('newTax');
+            var newEx = document.getElementById('newEx');
+            var newSale = document.getElementById('newSale');
+            var addBtn = document.getElementById('addEntryBtn');
+            var resetBtn = document.getElementById('resetDataBtn');
+            var autoHint = document.getElementById('autoHint');
+            var idHint = document.getElementById('idHint');
 
-            editModal.classList.add('active');
-        };
-
-        function saveEdit() {
-            const row = fullData.find(r => r._id === editingRowId);
-            if (!row) return;
-
-            const party = editParty.value.trim();
-            const inv = editInv.value.trim();
-
-            if (!party) {
-                alert('Party Name is required.');
-                return;
-            }
-            if (!inv) {
-                alert('Invoice # is required.');
-                return;
+            function formatNumber(n) {
+                return n.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
             }
 
-            row.party = party;
-            row.ntrn = editNtrn.value.trim();
-            row.strn = editStrn.value.trim();
-            row.inv = inv;
-            row.date = editDate.value || '2026-07-01';
-            row.tax = parseFloat(editTax.value) || 0;
-            row.ex = parseFloat(editEx.value) || 0;
-            row.sale = parseFloat(editSale.value) || 0;
-
-            saveData();
-            updateSummaryCards();
-            applyFilter();
-            editModal.classList.remove('active');
-            editingRowId = null;
-        }
-
-        function addNewEntry() {
-            if (!isAdmin()) {
-                alert('Only admin can add entries.');
-                return;
+            function formatCurrency(n) {
+                return n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             }
 
-            const party = newParty.value.trim();
-            const ntrn = newNtrn.value.trim();
-            const strn = newStrn.value.trim();
-            const inv = newInv.value.trim();
-            const date = newDate.value;
-            const tax = parseFloat(newTax.value) || 0;
-            const ex = parseFloat(newEx.value) || 0;
-            const sale = parseFloat(newSale.value) || 0;
-
-            if (!party) {
-                alert('Please enter a Party Name.');
-                newParty.focus();
-                return;
+            function computeTotals(data) {
+                var inv = data.length;
+                var tax = 0, ex = 0, sale = 0;
+                data.forEach(function(r) {
+                    tax += r.tax;
+                    ex += r.ex;
+                    sale += r.sale;
+                });
+                return { inv: inv, tax: tax, ex: ex, sale: sale };
             }
 
-            if (!inv) {
-                alert('Please enter an Invoice #.');
-                newInv.focus();
-                return;
+            function findPartyByPartyId(partyId) {
+                var trimmed = partyId.trim();
+                if (!trimmed) return null;
+                return partyDatabase[trimmed] || null;
             }
 
-            const duplicate = fullData.some(row => row.party.toLowerCase() === party.toLowerCase() && row.inv === inv);
-            if (duplicate) {
-                if (!confirm(`Invoice #${inv} already exists for "${party}". Do you want to add it anyway?`)) {
+            function handlePartyIdAutoFill() {
+                var idVal = newPartyId.value.trim();
+
+                // Reset styling first.
+                newParty.classList.remove('auto-filled');
+                newNtrn.classList.remove('auto-filled');
+                newStrn.classList.remove('auto-filled');
+
+                if (!idVal) {
+                    idHint.textContent = '';
+                    autoHint.textContent = '';
+                    newParty.value = '';
+                    newNtrn.value = '';
+                    newStrn.value = '';
+                    setPartyFieldsEditable(true);
                     return;
+                }
+
+                var details = findPartyByPartyId(idVal);
+                if (details) {
+                    newParty.value = details.name || '';
+                    newNtrn.value = details.ntrn || '';
+                    newStrn.value = details.strn || '';
+                    idHint.textContent = '✅ Party found';
+                    idHint.style.color = '#0f7b3e';
+                    autoHint.textContent = '✅ Auto-filled';
+                    autoHint.style.color = '#0f7b3e';
+                    newParty.classList.add('auto-filled');
+                    newNtrn.classList.add('auto-filled');
+                    newStrn.classList.add('auto-filled');
+
+                    // Known party: keep user-mode master data protected.
+                    setPartyFieldsEditable(isAdmin);
+                } else {
+                    idHint.textContent = '➕ New Party ID — enter party details below';
+                    idHint.style.color = '#0b2b3f';
+                    autoHint.textContent = '✏️ New party: Name / NTRN / STRN can be entered';
+                    autoHint.style.color = '#0b2b3f';
+
+                    // IMPORTANT: unknown/new parties must be editable for BOTH roles.
+                    setPartyFieldsEditable(true);
                 }
             }
 
-            fullData.push({
-                _id: nextId++,
-                party: party,
-                ntrn: ntrn,
-                strn: strn,
-                inv: inv,
-                date: date || '2026-07-01',
-                tax: tax,
-                ex: ex,
-                sale: sale
-            });
-
-            newInv.value = '';
-            newDate.value = '';
-            newTax.value = '';
-            newEx.value = '';
-            newSale.value = '';
-
-            saveData();
-            updateSummaryCards();
-            applyFilter();
-            autoFillNTRNSTRN();
-            newInv.focus();
-        }
-
-        function resetData() {
-            if (!isAdmin()) {
-                alert('Only admin can reset data.');
-                return;
+            function setPartyFieldsEditable(editable) {
+                newParty.readOnly = !editable;
+                newNtrn.readOnly = !editable;
+                newStrn.readOnly = !editable;
+                if (editable) {
+                    newParty.classList.remove('readonly-field');
+                    newNtrn.classList.remove('readonly-field');
+                    newStrn.classList.remove('readonly-field');
+                } else if (!isAdmin) {
+                    newParty.classList.add('readonly-field');
+                    newNtrn.classList.add('readonly-field');
+                    newStrn.classList.add('readonly-field');
+                }
             }
 
-            if (confirm('Reset all data to original? Any added entries will be lost.')) {
-                fullData = JSON.parse(JSON.stringify(initialData));
-                fullData.forEach((row, idx) => row._id = idx + 1);
-                nextId = fullData.length + 1;
+            function applyFilters() {
+                var filtered = fullData.slice();
+                
+                var fromDate = dateFrom.value;
+                var toDate = dateTo.value;
+                
+                if (fromDate && toDate) {
+                    filtered = filtered.filter(function(row) { return row.date >= fromDate && row.date <= toDate; });
+                } else if (fromDate) {
+                    filtered = filtered.filter(function(row) { return row.date >= fromDate; });
+                } else if (toDate) {
+                    filtered = filtered.filter(function(row) { return row.date <= toDate; });
+                }
+                
+                var searchTerm = searchInput.value.trim().toUpperCase();
+                if (searchTerm) {
+                    filtered = filtered.filter(function(row) {
+                        return row.party.toUpperCase().includes(searchTerm) || 
+                            (row.partyId && row.partyId.includes(searchTerm));
+                    });
+                }
+                
+                renderTable(filtered);
+                updateSummary(filtered);
+                
+                if (fromDate || toDate) {
+                    dateFilterCount.textContent = '📅 ' + filtered.length + ' entries in range';
+                } else {
+                    dateFilterCount.textContent = '';
+                }
+            }
+
+            function clearDateFilter() {
+                dateFrom.value = '';
+                dateTo.value = '';
+                dateFilterCount.textContent = '';
+                applyFilters();
+            }
+
+            function renderTable(data) {
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = '<tr class="empty-row"><td colspan="10">No entries found</td></tr>';
+                    return;
+                }
+
+                var html = '';
+                data.forEach(function(row) {
+                    var dateFormatted = row.date ? row.date.replace(/-/g, '/') : '—';
+                    var dataIndex = fullData.findIndex(function(d) {
+                        return d.party === row.party && d.inv === row.inv && d.date === row.date;
+                    });
+                    var deleteIdx = dataIndex !== -1 ? dataIndex : 0;
+                    
+                    var deleteButton = isAdmin 
+                        ? '<button class="btn-danger-small" onclick="deleteEntry(' + deleteIdx + ')">Delete</button>'
+                        : '<button class="btn-danger-small disabled" onclick="alert(\'⚠️ User cannot delete\')">Delete</button>';
+                    
+                    html += '<tr>' +
+                        '<td>' + (row.partyId || '—') + '</td>' +
+                        '<td class="party-name">' + row.party + '</td>' +
+                        '<td>' + (row.ntrn || '—') + '</td>' +
+                        '<td>' + (row.strn || '—') + '</td>' +
+                        '<td>' + row.inv + '</td>' +
+                        '<td>' + dateFormatted + '</td>' +
+                        '<td class="text-right">' + formatNumber(row.tax) + '</td>' +
+                        '<td class="text-right">' + formatCurrency(row.ex) + '</td>' +
+                        '<td class="text-right">' + formatNumber(row.sale) + '</td>' +
+                        '<td class="delete-cell">' + deleteButton + '</td>' +
+                    '</tr>';
+                });
+                tbody.innerHTML = html;
+            }
+
+            function updateSummary(data) {
+                var totals = computeTotals(data);
+                totalInvEl.textContent = totals.inv;
+                totalTaxEl.textContent = formatNumber(totals.tax);
+                totalExEl.textContent = formatCurrency(totals.ex);
+                totalSaleEl.textContent = formatNumber(totals.sale);
+                resultCount.textContent = data.length + ' entries';
+            }
+
+            window.deleteEntry = function(index) {
+                if (!isAdmin) {
+                    alert('⚠️ User cannot delete entries.');
+                    return;
+                }
+                if (index >= 0 && index < fullData.length) {
+                    if (confirm('Delete this entry?')) {
+                        fullData.splice(index, 1);
+                        saveData();
+                        applyFilters();
+                    }
+                }
+            };
+
+            function resetData() {
+                if (!isAdmin) {
+                    alert('⚠️ User cannot reset data.');
+                    return;
+                }
+                if (confirm('Reset all data?')) {
+                    fullData = JSON.parse(JSON.stringify(initialData));
+                    localStorage.removeItem(STORAGE_KEY);
+                    searchInput.value = '';
+                    clearDateFilter();
+                    newPartyId.value = '';
+                    newParty.value = '';
+                    newNtrn.value = '';
+                    newStrn.value = '';
+                    newInv.value = '';
+                    newTax.value = '';
+                    newEx.value = '';
+                    newSale.value = '';
+                    autoHint.textContent = '';
+                    idHint.textContent = '';
+                    applyFilters();
+                }
+            }
+
+            function addEntry() {
+                var partyId = newPartyId.value.trim();
+                var party = newParty.value.trim();
+                var ntrn = newNtrn.value.trim();
+                var strn = newStrn.value.trim();
+                var inv = newInv.value.trim();
+                var date = newDate.value;
+                var tax = parseFloat(newTax.value);
+                var ex = parseFloat(newEx.value);
+                var sale = parseFloat(newSale.value);
+
+                if (!partyId || !party || !inv || !date || isNaN(tax) || isNaN(ex) || isNaN(sale)) {
+                    alert('⚠️ Please fill Party ID, Party Name, Invoice #, Date, Advance Tax, EX VALUE and TOTAL SALE.');
+                    return;
+                }
+
+                // Strong duplicate invoice protection.
+                var duplicate = fullData.find(function(r) {
+                    return String(r.inv).trim().toUpperCase() === inv.toUpperCase();
+                });
+                if (duplicate) {
+                    alert('⚠️ THESE INVOICE ALREADY EXIST!\n\nInvoice #: ' + inv +
+                          '\nParty: ' + duplicate.party +
+                          '\nDate: ' + (duplicate.date || '—'));
+                    newInv.focus();
+                    return;
+                }
+
+                var newRecord = {
+                    partyId: partyId,
+                    party: party,
+                    ntrn: ntrn,
+                    strn: strn,
+                    inv: inv,
+                    date: date,
+                    tax: tax,
+                    ex: ex,
+                    sale: sale
+                };
+
+                fullData.push(newRecord);
+
+                // Register a new party automatically so the next invoice auto-fills it.
+                partyDatabase[partyId] = {
+                    name: party,
+                    ntrn: ntrn,
+                    strn: strn
+                };
                 saveData();
-                clearDateFilterFunc();
+
+                // Make the newly-added entry immediately visible.
                 searchInput.value = '';
-                updateSummaryCards();
-                applyFilter();
+                if (dateFrom.value && dateTo.value &&
+                    (date < dateFrom.value || date > dateTo.value)) {
+                    dateFrom.value = '';
+                    dateTo.value = '';
+                    dateFilterCount.textContent = '';
+                }
+
+                newPartyId.value = '';
                 newParty.value = '';
                 newNtrn.value = '';
                 newStrn.value = '';
@@ -1490,210 +1618,97 @@
                 newTax.value = '';
                 newEx.value = '';
                 newSale.value = '';
-                partyMatchStatus.innerHTML = '';
+                autoHint.textContent = '';
+                idHint.textContent = '';
+                setPartyFieldsEditable(true);
+
+                applyFilters();
             }
-        }
 
-        // ----- AUTH FUNCTIONS -----
-        function login(username, password) {
-            const user = USERS[username.toLowerCase()];
-            if (user && user.password === password) {
-                currentUser = {
-                    username: username,
-                    role: user.role
-                };
-                saveUserSession();
-                loginOverlay.classList.add('hidden');
-                updateUIForRole();
-                loginError.textContent = '';
-                return true;
-            }
-            return false;
-        }
+            var today = new Date();
+            var yyyy = today.getFullYear();
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var dd = String(today.getDate()).padStart(2, '0');
+            newDate.value = yyyy + '-' + mm + '-' + dd;
 
-        function logout() {
-            currentUser = null;
-            clearUserSession();
-            loginOverlay.classList.remove('hidden');
-            loginUsername.value = '';
-            loginPassword.value = '';
-            loginError.textContent = '';
-            updateUIForRole();
-        }
+            // Auto-set the date range filter to the CURRENT month, every time
+            // the page is opened/refreshed — no more hardcoded "July 2026".
+            var lastDay = new Date(yyyy, today.getMonth() + 1, 0).getDate();
+            dateFrom.value = yyyy + '-' + mm + '-01';
+            dateTo.value = yyyy + '-' + mm + '-' + String(lastDay).padStart(2, '0');
 
-        function checkSession() {
-            const session = loadUserSession();
-            if (session && USERS[session.username.toLowerCase()]) {
-                const user = USERS[session.username.toLowerCase()];
-                if (user.password) {
-                    currentUser = session;
-                    loginOverlay.classList.add('hidden');
-                    updateUIForRole();
-                    return true;
-                }
-            }
-            return false;
-        }
+            updateHeaderDates(today);
 
-        // ----- INITIALIZATION -----
-        function initializeData() {
-            const saved = loadData();
-            if (saved && saved.length > 0) {
-                fullData = saved;
-            } else {
-                fullData = JSON.parse(JSON.stringify(initialData));
-                fullData.forEach((row, idx) => row._id = idx + 1);
-                saveData();
-            }
-            fullData.forEach((row, idx) => {
-                if (!row._id) row._id = idx + 1;
-            });
-            nextId = fullData.length > 0 ? Math.max(...fullData.map(r => r._id)) + 1 : 1;
-        }
-
-        // ----- EVENT LISTENERS -----
-        loginBtn.addEventListener('click', function() {
-            const username = loginUsername.value.trim();
-            const password = loginPassword.value.trim();
-            if (!username || !password) {
-                loginError.textContent = 'Please enter both username and password.';
-                return;
-            }
-            if (login(username, password)) {
-                loginError.textContent = '';
-            } else {
-                loginError.textContent = 'Invalid username or password.';
-            }
-        });
-
-        loginPassword.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                loginBtn.click();
-            }
-        });
-
-        loginUsername.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                loginPassword.focus();
-            }
-        });
-
-        logoutBtn.addEventListener('click', logout);
-
-        // Date Filter Events
-        dateFilterBtn.addEventListener('click', applyDateFilter);
-
-        clearDateFilter.addEventListener('click', clearDateFilterFunc);
-
-        fromDate.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                toDate.focus();
-            }
-        });
-
-        toDate.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                dateFilterBtn.click();
-            }
-        });
-
-        // Search Events
-        searchBtn.addEventListener('click', applyFilter);
-        clearBtn.addEventListener('click', function() {
-            searchInput.value = '';
-            applyFilter();
-            searchInput.focus();
-        });
-
-        searchInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                applyFilter();
-            }
-            if (e.key === 'Escape') {
+            addBtn.onclick = addEntry;
+            if (resetBtn) resetBtn.onclick = resetData;
+            newPartyId.oninput = handlePartyIdAutoFill;
+            
+            searchBtn.onclick = applyFilters;
+            searchInput.onkeydown = function(e) {
+                if (e.key === 'Enter') applyFilters();
+            };
+            clearBtn.onclick = function() {
                 searchInput.value = '';
-                applyFilter();
-                searchInput.blur();
-            }
-        });
+                applyFilters();
+            };
+            
+            applyDateFilter.onclick = applyFilters;
+            clearDateFilterBtn.onclick = clearDateFilter;
+            
+            dateFrom.onkeydown = function(e) {
+                if (e.key === 'Enter') applyFilters();
+            };
+            dateTo.onkeydown = function(e) {
+                if (e.key === 'Enter') applyFilters();
+            };
 
-        addBtn.addEventListener('click', addNewEntry);
-
-        document.querySelectorAll('#addForm input').forEach(input => {
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    addNewEntry();
-                }
-            });
-        });
-
-        resetBtn.addEventListener('click', resetData);
-
-        let autoFillTimeout = null;
-        newParty.addEventListener('input', function() {
-            clearTimeout(autoFillTimeout);
-            autoFillTimeout = setTimeout(autoFillNTRNSTRN, 300);
-        });
-
-        newParty.addEventListener('blur', function() {
-            clearTimeout(autoFillTimeout);
-            autoFillNTRNSTRN();
-        });
-
-        editCancelBtn.addEventListener('click', function() {
-            editModal.classList.remove('active');
-            editingRowId = null;
-        });
-
-        editSaveBtn.addEventListener('click', saveEdit);
-
-        editModal.addEventListener('click', function(e) {
-            if (e.target === editModal) {
-                editModal.classList.remove('active');
-                editingRowId = null;
-            }
-        });
-
-        document.querySelectorAll('#editModal input').forEach(input => {
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    saveEdit();
-                }
-                if (e.key === 'Escape') {
-                    editModal.classList.remove('active');
-                    editingRowId = null;
-                }
-            });
-        });
-
-        // ----- STARTUP -----
-        initializeData();
-
-        if (!checkSession()) {
-            loginOverlay.classList.remove('hidden');
-            loginUsername.focus();
+            applyFilters();
         }
 
-        const today = new Date().toISOString().split('T')[0];
-        newDate.value = today;
+        // Extra safety net: if this tab was left open and another tab/session
+        // saved new data in the meantime, refresh + re-render as soon as the
+        // user switches back to this tab — so it's never showing stale counts.
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState !== 'visible') return;
+            var container = document.getElementById('mainContainer');
+            if (!container || container.className.indexOf('hidden') !== -1) return;
+            refreshDataFromStorage();
+            initApp(isAdmin);
+        });
 
-        // Set default date range for July 2026
-        fromDate.value = '2026-07-01';
-        toDate.value = '2026-07-31';
+        function doLogout() {
+            if (confirm('Logout?')) {
+                clearLoginSession();
+                document.getElementById('mainContainer').className = 'container hidden';
+                document.getElementById('loginOverlay').className = 'login-overlay';
+                document.getElementById('loginUser').value = '';
+                document.getElementById('loginPass').value = '';
+                document.getElementById('loginError').textContent = '';
+                document.getElementById('appContent').innerHTML = '';
+                document.getElementById('loginUser').focus();
+            }
+        }
 
-        updateSummaryCards();
-        applyFilter();
-        updateUIForRole();
+        // ============================================================
+        // STARTUP / PERSISTENT LOGIN
+        // ============================================================
+        // If the user was already logged in, restore the app after refresh.
+        // This is intentionally stored in localStorage so the single HTML
+        // file works without PHP/MySQL/server-side login.
+        (function restoreLoginAfterRefresh() {
+            var savedRole = getLoginSession();
+            if (savedRole) {
+                showApp(savedRole);
+            } else {
+                document.getElementById('loginUser').focus();
+            }
+        })();
 
-        window.deleteEntry = window.deleteEntry;
-        window.editEntry = window.editEntry;
-
-    })();
-</script>
-
+        console.log('✅ KIWI Tax Invoice System Ready!');
+        console.log('📋 Original records: ' + initialData.length);
+        console.log('📋 Login Credentials:');
+        console.log('  👑 Admin: admin / admin123');
+        console.log('  👤 User:  user / user123');
+    </script>
 </body>
 </html>
