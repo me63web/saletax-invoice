@@ -741,7 +741,25 @@
         <div id="appContent"></div>
     </div>
 
+    <!-- Firebase (compat SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-database-compat.js"></script>
+
     <script>
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyB_PNwNGs-HG98BPVdtOUeFmn9Yz9GbesA",
+          authDomain: "kiwi-invoices.firebaseapp.com",
+          databaseURL: "https://kiwi-invoices-default-rtdb.firebaseio.com",
+          projectId: "kiwi-invoices",
+          storageBucket: "kiwi-invoices.firebasestorage.app",
+          messagingSenderId: "437707889870",
+          appId: "1:437707889870:web:1170810ecbb429a0a3849f",
+          measurementId: "G-R9XSRWG91C"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const fbDb = firebase.database();
+
         // ============================================================
         // LOGIN SYSTEM
         // ============================================================
@@ -831,18 +849,14 @@
             document.getElementById('loginOverlay').className = 'login-overlay hidden';
             document.getElementById('mainContainer').className = 'container';
 
-            // Always pull the latest saved data at the moment of login.
-            // Without this, a tab that's been open for a while (or a
-            // second tab/window) keeps whatever it loaded originally in
-            // memory, even after another login elsewhere has since saved
-            // newer entries to storage — making "missing" data appear.
-            refreshDataFromStorage();
-
-            var isAdmin = (role === 'admin');
-            var appHtml = buildAppHTML(isAdmin);
-            document.getElementById('appContent').innerHTML = appHtml;
-
-            initApp(isAdmin);
+            // Pull the latest data from Firebase (falls back to localStorage
+            // if offline or if Firebase has nothing saved yet), then render.
+            refreshDataFromCloud(function() {
+                var isAdmin = (role === 'admin');
+                var appHtml = buildAppHTML(isAdmin);
+                document.getElementById('appContent').innerHTML = appHtml;
+                initApp(isAdmin);
+            });
         }
 
         function refreshDataFromStorage() {
@@ -858,6 +872,38 @@
             } catch (e) {
                 console.warn('Party database could not be refreshed:', e);
             }
+        }
+
+        // Fetches the latest invoices + parties from Firebase Realtime Database.
+        // If Firebase has saved data, it wins (so every device stays in sync).
+        // If Firebase is empty or unreachable, falls back to whatever is in
+        // localStorage so the app still works offline.
+        function refreshDataFromCloud(callback) {
+            refreshDataFromStorage();
+
+            fbDb.ref('kiwi_data').once('value')
+                .then(function(snapshot) {
+                    var remote = snapshot.val();
+                    if (remote) {
+                        if (Array.isArray(remote.invoices)) fullData = remote.invoices;
+                        if (remote.parties && typeof remote.parties === 'object') {
+                            Object.keys(remote.parties).forEach(function(id) {
+                                if (id) partyDatabase[id] = remote.parties[id];
+                            });
+                        }
+                        try {
+                            localStorage.setItem(STORAGE_KEY, JSON.stringify(fullData));
+                            localStorage.setItem(PARTY_STORAGE_KEY, JSON.stringify(partyDatabase));
+                        } catch (e) {
+                            console.warn('Could not cache cloud data locally:', e);
+                        }
+                    }
+                    callback();
+                })
+                .catch(function(err) {
+                    console.warn('Could not reach Firebase, using local data:', err);
+                    callback();
+                });
         }
 
         function buildAppHTML(isAdmin) {
@@ -1115,7 +1161,22 @@
             }
             // If the user has connected a local file, mirror every save to it automatically.
             writeToLocalFile();
+            // Push the same data up to Firebase so every device/browser stays in sync.
+            syncToFirebase();
             return true;
+        }
+
+        // Pushes the current invoices + parties up to Firebase Realtime Database.
+        // Fire-and-forget: if the user is offline, the local save above already
+        // succeeded, so this just retries silently next time saveData() runs.
+        function syncToFirebase() {
+            fbDb.ref('kiwi_data').set({
+                invoices: fullData,
+                parties: partyDatabase,
+                savedAt: new Date().toISOString()
+            }).catch(function(err) {
+                console.warn('Could not sync to Firebase (will retry on next save):', err);
+            });
         }
 
         // ============================================================
@@ -1546,6 +1607,7 @@
                     newSale.value = '';
                     autoHint.textContent = '';
                     idHint.textContent = '';
+                    saveData();
                     applyFilters();
                 }
             }
@@ -1672,8 +1734,9 @@
             if (document.visibilityState !== 'visible') return;
             var container = document.getElementById('mainContainer');
             if (!container || container.className.indexOf('hidden') !== -1) return;
-            refreshDataFromStorage();
-            initApp(isAdmin);
+            refreshDataFromCloud(function() {
+                initApp(isAdmin);
+            });
         });
 
         function doLogout() {
